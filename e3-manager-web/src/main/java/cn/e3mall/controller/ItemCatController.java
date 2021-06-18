@@ -20,6 +20,11 @@ public class ItemCatController {
     @Autowired
     private ItemCatService itemCatService;
 
+    /**
+     * 调用服务查询节点列表
+     * @param parentId
+     * @return
+     */
     @RequestMapping("/list")
     public List<EasyUITreeNode> getItemCatList(@RequestParam(value = "id" , defaultValue = "0") Long parentId){
             //调用服务查询节点列表

@@ -14,11 +14,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PageController {
 
+	/**
+	 * 映射后台管理首页
+	 * @return
+	 */
 	@RequestMapping("/")
 	public String showIndex() {
 		return "index";
 	}
-	
+
+	/**
+	 * 分页查询
+	 * @param page
+	 * @return
+	 */
 	@RequestMapping("/{page}")
 	public String showPage(@PathVariable String page) {
 		return page;

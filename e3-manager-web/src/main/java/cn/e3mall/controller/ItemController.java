@@ -1,9 +1,11 @@
 package cn.e3mall.controller;
 
+import cn.e3mall.common.utils.E3Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.e3mall.common.pojo.EasyUIDataGridResult;
@@ -22,14 +24,26 @@ public class ItemController {
 
 	@Autowired
 	private ItemService itemService;
-	
+
+
+	/**
+	 * 根据itemid做映射路径
+	 * @param itemId
+	 * @return
+	 */
 	@RequestMapping("/item/{itemId}")
 	@ResponseBody
 	public TbItem getItemById(@PathVariable Long itemId) {
 		TbItem tbItem = itemService.getItemById(itemId);
 		return tbItem;
 	}
-	
+
+	/**
+	 * 查询商品列表
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
 	@RequestMapping("/item/list")
 	@ResponseBody
 	public EasyUIDataGridResult getItemList(Integer page, Integer rows) {
@@ -37,5 +51,22 @@ public class ItemController {
 		EasyUIDataGridResult result = itemService.getItemList(page, rows);
 		return result;
 	}
+
+	/**
+	 * 新增商品
+	 * @param tbItem
+	 * @param desc
+	 * @return
+	 */
+	@RequestMapping(value = "/item/save",method = RequestMethod.POST)
+	@ResponseBody
+	public E3Result addItem(TbItem tbItem,String desc){
+		E3Result e3Result = itemService.addItem(tbItem, desc);
+		return e3Result;
+	}
+
+
+
+
 
 }
