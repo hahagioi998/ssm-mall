@@ -1,8 +1,9 @@
 package test;
 
 
+import cn.e3mall.common.utils.FastDFSClient;
 import org.csource.fastdfs.*;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class UploadTest {
 
@@ -20,9 +21,15 @@ public class UploadTest {
         //创建一个storageclient对象参数需要trackerserver和storageserver对象
         StorageClient storageClient = new StorageClient(trackerServer,storageServer);
         //使用storageclient上传对象
-        String[] pngs = storageClient.upload_file("C:\\Users\\Administrator\\Desktop\\1.jpg", "jpg", null);
+        String[] pngs = storageClient.upload_file("C:\\Users\\Administrator\\Desktop\\55.jpg", "jpg", null);
         for (String png : pngs) {
             System.out.println(png);
         }
+    }
+    @Test
+    public void testFastDFSClient() throws Exception{
+        FastDFSClient fastDFSClient = new FastDFSClient("C:\\Users\\Administrator\\IdeaProjects\\mall-parent\\e3-manager-web\\src\\main\\resources\\conf\\client.conf");
+        String uploadFile = fastDFSClient.uploadFile("C:\\Users\\Administrator\\Desktop\\1.jpg");
+        System.out.println(uploadFile);
     }
 }
