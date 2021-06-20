@@ -1,5 +1,7 @@
 package cn.e3mall.pojo;
 
+import cn.e3mall.common.utils.E3Result;
+
 import java.io.Serializable;
 import java.util.Date;
 

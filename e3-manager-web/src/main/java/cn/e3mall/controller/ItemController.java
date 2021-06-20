@@ -1,12 +1,10 @@
 package cn.e3mall.controller;
 
 import cn.e3mall.common.utils.E3Result;
+import cn.e3mall.pojo.TbItemDesc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import cn.e3mall.common.pojo.EasyUIDataGridResult;
 import cn.e3mall.pojo.TbItem;
@@ -58,15 +56,87 @@ public class ItemController {
 	 * @param desc
 	 * @return
 	 */
-	@RequestMapping(value = "/item/save",method = RequestMethod.POST)
+	@RequestMapping(value = "/rest/page/item/save",method = RequestMethod.POST)
 	@ResponseBody
 	public E3Result addItem(TbItem tbItem,String desc){
 		E3Result e3Result = itemService.addItem(tbItem, desc);
 		return e3Result;
 	}
 
+	/**
+	 * 编辑商品功能-根据ID从数据库表TbItem表查询一条数据
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/rest/item/param/item/query/{id}")
+	@ResponseBody
+	public TbItem queryById(@PathVariable long id){
+		TbItem item = itemService.getItemById(id);
+		//System.out.println("方法被调用-TbItem");
+		return item;
+	}
+
+	/**
+	 * 异步重新加载回显描述-编辑商品接口-查询商品描述
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/rest/item/query/item/desc/{id}")
+	@ResponseBody
+	public TbItemDesc selectTbItemDesc(@PathVariable long id){
+		TbItemDesc itemDesc = itemService.selectTbItemDesc(id);
+		//System.out.println("方法被调用-TbItemDesc");
+		return itemDesc;
+	}
+
+	/**
+	 * 商品编辑功能
+	 * @param item
+	 * @param desc
+	 * @return
+	 */
+	@RequestMapping(value = "/rest/item/update",method = RequestMethod.POST)
+	@ResponseBody
+	public E3Result update(TbItem item,String desc){
+	    E3Result  e3Result = itemService.update(item,desc);
+	    return e3Result;
+	}
+
+	/**
+	 * 批量删除商品功能
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping(value = "/rest/item/delete",method = RequestMethod.POST)
+	@ResponseBody
+	public E3Result deleteByIds(String ids){
+	   E3Result result = itemService.deleteBatch(ids);
+	   return result;
+	}
+
+	/**
+	 * 批量商品id下架
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping(value = "/rest/item/reshelf",method = RequestMethod.POST)
+	@ResponseBody
+	public E3Result updateByShelves(String ids){
+		E3Result result = itemService.updateByShelves(ids);
+		return result;
+	}
 
 
-
+	/**
+	 * 批量商品id上架
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping("/rest/item/instock")
+	@ResponseBody
+	public E3Result updateByinstock(String ids){
+	  E3Result  result = itemService.updateByinstock(ids);
+	  return result;
+	}
 
 }

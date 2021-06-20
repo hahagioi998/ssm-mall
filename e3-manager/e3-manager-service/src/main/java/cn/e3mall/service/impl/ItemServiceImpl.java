@@ -7,6 +7,8 @@ import cn.e3mall.common.utils.E3Result;
 import cn.e3mall.common.utils.IDUtils;
 import cn.e3mall.mapper.TbItemDescMapper;
 import cn.e3mall.pojo.TbItemDesc;
+import cn.e3mall.pojo.TbItemDescExample;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -92,6 +94,73 @@ public class ItemServiceImpl implements ItemService {
 		itemDescMapper.insert(itemDesc);
 		//7.返回成功
 		return E3Result.ok();
+	}
+
+	@Override
+	public TbItemDesc selectTbItemDesc(long id) {
+		TbItemDesc itemDesc = itemDescMapper.selectByPrimaryKey(id);
+		return itemDesc;
+	}
+
+	@Override
+	public E3Result update(TbItem item, String desc) {
+		// 1、根据商品id，更新商品表，条件更新
+		TbItemExample example = new TbItemExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andIdEqualTo(item.getId());
+		itemMapper.updateByExampleSelective(item,example);
+		// 2、根据商品id，更新商品描述表，条件更新
+		TbItemDesc tbItemDesc = new TbItemDesc();
+		tbItemDesc.setItemDesc(desc);
+		TbItemDescExample descExample = new TbItemDescExample();
+		TbItemDescExample.Criteria descCriteria = descExample.createCriteria();
+		descCriteria.andItemIdEqualTo(item.getId());
+		itemDescMapper.updateByExampleSelective(tbItemDesc,descExample);
+		return E3Result.ok();
+	}
+
+	@Override
+	public E3Result deleteBatch(String ids) {
+		//判断ids不为空
+		if (StringUtils.isNotBlank(ids)){
+			//分割ids
+			String[] split = ids.split(".");
+			for (String id : split) {
+				//现实情况中是删除根据项目改为商品状态-3
+				itemMapper.deleteByPrimaryKey(Long.valueOf(id));
+				itemDescMapper.deleteByPrimaryKey(Long.valueOf(id));
+			}
+			return E3Result.ok();
+		}
+		return null;
+	}
+
+	@Override
+	public E3Result updateByShelves(String ids) {
+		if (StringUtils.isNotBlank(ids)){
+			String[] split = ids.split(".");
+			for (String id : split) {
+				TbItem item = itemMapper.selectByPrimaryKey(Long.valueOf(id));
+				item.setStatus((byte)2);
+				itemMapper.updateByPrimaryKey(item);
+			}
+			return E3Result.ok();
+		}
+		return null;
+	}
+
+	@Override
+	public E3Result updateByinstock(String ids) {
+		if (StringUtils.isNotBlank(ids)){
+			String[] split = ids.split(".");
+			for (String id : split) {
+				TbItem item = itemMapper.selectByPrimaryKey(Long.valueOf(id));
+				item.setStatus((byte)1);
+				itemMapper.updateByPrimaryKey(item);
+			}
+			return E3Result.ok();
+		}
+		return null;
 	}
 
 }
