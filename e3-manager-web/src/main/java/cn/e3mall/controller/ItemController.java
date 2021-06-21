@@ -56,7 +56,7 @@ public class ItemController {
 	 * @param desc
 	 * @return
 	 */
-	@RequestMapping(value = "/rest/page/item/save",method = RequestMethod.POST)
+	@RequestMapping(value = "/item/save",method = RequestMethod.POST)
 	@ResponseBody
 	public E3Result addItem(TbItem tbItem,String desc){
 		E3Result e3Result = itemService.addItem(tbItem, desc);
@@ -107,7 +107,7 @@ public class ItemController {
 	 * @param ids
 	 * @return
 	 */
-	@RequestMapping(value = "/rest/item/delete",method = RequestMethod.POST)
+	@RequestMapping(value = "/item/delete",method = RequestMethod.POST)
 	@ResponseBody
 	public E3Result deleteByIds(String ids){
 	   E3Result result = itemService.deleteBatch(ids);
@@ -119,7 +119,7 @@ public class ItemController {
 	 * @param ids
 	 * @return
 	 */
-	@RequestMapping(value = "/rest/item/reshelf",method = RequestMethod.POST)
+	@RequestMapping(value = "/item/instock",method = RequestMethod.POST)
 	@ResponseBody
 	public E3Result updateByShelves(String ids){
 		E3Result result = itemService.updateByShelves(ids);
@@ -132,7 +132,7 @@ public class ItemController {
 	 * @param ids
 	 * @return
 	 */
-	@RequestMapping("/rest/item/instock")
+	@RequestMapping("/item/reshelf")
 	@ResponseBody
 	public E3Result updateByinstock(String ids){
 	  E3Result  result = itemService.updateByinstock(ids);

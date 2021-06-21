@@ -122,11 +122,10 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public E3Result deleteBatch(String ids) {
 		//判断ids不为空
-		if (StringUtils.isNotBlank(ids)){
+		if(StringUtils.isNoneBlank(ids)){
 			//分割ids
-			String[] split = ids.split(".");
-			for (String id : split) {
-				//现实情况中是删除根据项目改为商品状态-3
+			String[] split = ids.split(",");
+			for ( String id : split ) {
 				itemMapper.deleteByPrimaryKey(Long.valueOf(id));
 				itemDescMapper.deleteByPrimaryKey(Long.valueOf(id));
 			}
@@ -138,11 +137,12 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public E3Result updateByShelves(String ids) {
 		if (StringUtils.isNotBlank(ids)){
-			String[] split = ids.split(".");
+			String[] split = ids.split(",");
 			for (String id : split) {
 				TbItem item = itemMapper.selectByPrimaryKey(Long.valueOf(id));
 				item.setStatus((byte)2);
 				itemMapper.updateByPrimaryKey(item);
+				System.out.println("updateToStatus 2:"+id);
 			}
 			return E3Result.ok();
 		}
@@ -152,11 +152,12 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public E3Result updateByinstock(String ids) {
 		if (StringUtils.isNotBlank(ids)){
-			String[] split = ids.split(".");
+			String[] split = ids.split(",");
 			for (String id : split) {
 				TbItem item = itemMapper.selectByPrimaryKey(Long.valueOf(id));
 				item.setStatus((byte)1);
 				itemMapper.updateByPrimaryKey(item);
+				System.out.println("updateToStatus 1:"+id);
 			}
 			return E3Result.ok();
 		}
