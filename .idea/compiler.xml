@@ -10,10 +10,11 @@
         <module name="e3-manager-interface" />
         <module name="e3-common" />
         <module name="e3-manager-dao" />
+        <module name="e3-content-interface" />
         <module name="e3-manager-service" />
-        <module name="e3-content" />
         <module name="e3-manager-web" />
         <module name="e3-portal-web" />
+        <module name="e3-content-service" />
       </profile>
     </annotationProcessing>
   </component>
