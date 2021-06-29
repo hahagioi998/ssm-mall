@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/e3-content/e3-content-interface/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/e3-content/e3-content-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/e3-manager-web/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/e3-manager-web/src/main/resources" charset="UTF-8" />

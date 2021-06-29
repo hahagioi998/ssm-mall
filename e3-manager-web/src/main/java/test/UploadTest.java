@@ -3,11 +3,11 @@ package test;
 
 import cn.e3mall.common.utils.FastDFSClient;
 import org.csource.fastdfs.*;
-import org.junit.Test;
+//import org.junit.Test;
 
 public class UploadTest {
 
-    @Test
+    //@Test
     public void test() throws Exception{
         //创建一个配置文件，文件名随意，内容就是tracker服务器地址
         //使用全局对象加载配置文件
@@ -26,7 +26,7 @@ public class UploadTest {
             System.out.println(png);
         }
     }
-    @Test
+    //@Test
     public void testFastDFSClient() throws Exception{
         FastDFSClient fastDFSClient = new FastDFSClient("C:\\Users\\Administrator\\IdeaProjects\\mall-parent\\e3-manager-web\\src\\main\\resources\\conf\\client.conf");
         String uploadFile = fastDFSClient.uploadFile("C:\\Users\\Administrator\\Desktop\\1.jpg");
