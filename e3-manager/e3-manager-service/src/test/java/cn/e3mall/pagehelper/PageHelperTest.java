@@ -6,7 +6,6 @@ import cn.e3mall.pojo.TbItem;
 import cn.e3mall.pojo.TbItemExample;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -14,7 +13,6 @@ import java.util.List;
 
 public class PageHelperTest {
 
-    @Test
     public void testPageHelper() throws Exception{
         //初始化spring容器
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-dao.xml");

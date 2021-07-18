@@ -2,7 +2,6 @@ package test;
 
 import java.util.HashSet;
 import java.util.Set;
-import org.testng.annotations.Test;
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCluster;
@@ -10,7 +9,6 @@ import redis.clients.jedis.JedisPool;
 
 public class JedisTest {
 
-	@Test
 	public void testJedis() throws Exception {
 		//创建一个连接Jedis对象，参数：host、port
 		Jedis jedis = new Jedis("192.168.1.109", 6379);
@@ -22,7 +20,6 @@ public class JedisTest {
 		jedis.close();
 	}
 
-	@Test
 	public void testJedisPool() throws Exception {
 		//创建一个连接池对象，两个参数host、port
 		JedisPool jedisPool = new JedisPool("192.168.1.109", 6379);
@@ -37,7 +34,6 @@ public class JedisTest {
 		jedisPool.close();
 	}
 
-	@Test
 	public void testJedisCluster() throws Exception {
 		//创建一个JedisCluster对象。有一个参数nodes是一个set类型。set中包含若干个HostAndPort对象。
 		Set<HostAndPort> nodes = new HashSet<>();
